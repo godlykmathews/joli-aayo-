@@ -18,6 +18,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [Profile::class, 'index']);
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+    Route::get('/search',function() {
+        return view('search.index');
+    });
+
     //groups the route with prefix /resume and gives it a name resume.
     Route::prefix('resume')->name('resume.')->group(function () {
         Route::get('{resume}/download', [ResumeVersionsController::class, 'download'])->name('download');
