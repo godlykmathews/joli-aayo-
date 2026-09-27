@@ -106,4 +106,8 @@ class ApplicationController extends Controller
         $application->delete();
         return redirect()->route('applications.index');
     }
+
+    public function search(Request $request) {
+        $request -> query('search');
+    }
 }
