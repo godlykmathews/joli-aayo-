@@ -37,10 +37,15 @@ class ResumeVersionsController extends Controller
                 'file' => 'required|file|mimes:pdf|max:4096'
             ]
         );
+        $hash = hash_file('sha256', $request->file('file')->getRealPath());
+        if($request->user()->resumeVersions()->where('hash',$hash)->exists()) {
+            return back()->withInput()->withErrors(['file'=>'This resume has been already uploaded!']);
+        }
         $path = $validated['file']->store('resumes'); //generate path and store it in the storage/app/resumees folder
         $request->user()->resumeVersions()->create([
             'label'=> $validated['label'],
-            'file_path'=>$path
+            'file_path'=>$path,
+            'hash'=>$hash
         ]);
 
         return redirect()->route('resume.index');
