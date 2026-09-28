@@ -5,7 +5,6 @@
             <tr>
                 <th>Company Name</th>
                 <th>Role</th>
-                <th>Download</th>
             </tr>
         </thead>
         <tbody>

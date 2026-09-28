@@ -13,7 +13,7 @@ class ResumeVersionsController extends Controller
      */
     public function index(Request $request)
     {
-         $resume = $request->user()->resumeVersions()->get();
+         $resume = $request->user()->resumeVersions()->orderBy('created_at','desc')->get();
         return view('resume.index',compact('resume'));
         
     }
