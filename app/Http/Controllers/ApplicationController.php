@@ -20,7 +20,7 @@ class ApplicationController extends Controller
         Gate::authorize('viewAny', Application::class);
 
         // Only view the applications of that logged in user
-        $applications = $request->user()->applications()->get();
+        $applications = $request->user()->applications()->orderBy('date_applied','desc')->get();
         return view('applications.index', compact('applications'));
     }
 
